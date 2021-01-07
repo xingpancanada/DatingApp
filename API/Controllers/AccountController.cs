@@ -31,9 +31,6 @@ namespace API.Controllers
             {
                 return BadRequest("Username is taken!");
             }
-            // if(registerDto.Password != registerDto.ConfirmPassword){
-            //     return BadRequest("Passwords are not same!");
-            // }
 
             using var hmac = new HMACSHA512();
 

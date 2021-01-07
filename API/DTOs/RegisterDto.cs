@@ -14,8 +14,8 @@ namespace API.DTOs
         [Required]
         public string Password {get; set;}
 
-        // [Compare("Password", ErrorMessage = "Passwords must match")]
-        // [Display(Name = "Confirm Password")]
-        // public string ConfirmPassword { get; set; }
+        [Compare("Password", ErrorMessage = "Passwords must match")]
+        [Display(Name = "Confirm Password")]
+        public string ConfirmPassword { get; set; }
     }
 }
