@@ -24,12 +24,18 @@ export class NavComponent implements OnInit {
     //this.currentUser$ = this.accountService.currentUser$;
   }
 
+  // login(){
+  //   this.accountService.login(this.model).subscribe(response => {
+  //     this.router.navigateByUrl('/members');
+  //   }, error => {
+  //     console.log(error);
+  //     this.toastr.error(error.error);
+  //   })
+  // }
+
   login(){
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/members');
-    }, error => {
-      console.log(error);
-      this.toastr.error(error.error);
     })
   }
 
