@@ -31,7 +31,7 @@ namespace API.Controllers
 
 
          // api/users/3
-        [Authorize]
+      
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
@@ -39,5 +39,33 @@ namespace API.Controllers
 
             return user;
         }
+
+        // // //Edit User by Id
+        // // [Authorize]
+        // [HttpPut("editUser/{id}")]
+        //  public async Task<ActionResult<AppUser>> EditUser(int id, AppUser appuser)
+        // {
+        //     var user = await _context.Users.FindAsync(id);
+        //     if(user != null){
+        //         user.FirstName = appuser.FirstName;
+        //         user.LastName = appuser.LastName;
+        //         user.UserName = appuser.UserName;
+        //         user.Active = appuser.Active;
+        //     }
+        //     return Ok(user);
+
+        // }
+
+        // //Delete a user
+        // [Authorize]
+        // [HttpPost("deleteUser/{id}")]
+        //  public async Task<ActionResult> DeleteUser(int id)
+        // {
+        //     var user = await _context.Users.FindAsync(id);
+
+        //     await _context.Users.(user);
+
+        //     return Ok();
+        // }
     }
 }

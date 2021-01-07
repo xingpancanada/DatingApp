@@ -16,10 +16,12 @@ namespace API.Controllers
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
 
+
         public AccountController(DataContext context, ITokenService tokenService)
         {
             _context = context;
             _tokenService = tokenService;
+
         }
 
         [HttpPost("register")]
@@ -29,6 +31,9 @@ namespace API.Controllers
             {
                 return BadRequest("Username is taken!");
             }
+            // if(registerDto.Password != registerDto.ConfirmPassword){
+            //     return BadRequest("Passwords are not same!");
+            // }
 
             using var hmac = new HMACSHA512();
 
