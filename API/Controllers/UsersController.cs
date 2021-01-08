@@ -1,75 +1,72 @@
 using System.Collections.Generic;
-using API.Data;
-using Microsoft.AspNetCore.Mvc;
-using API.Entities;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Data;
+using API.DTOs;
+using API.Entities;
+using API.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
     
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
+       
 
-        public UsersController(DataContext context)
-        {
-            _context = context;
+        // private readonly DataContext _context;
+
+        // public UsersController(DataContext context)
+        // {
+        //     _context = context;
+        // }
+
+         public readonly IUserRepository _userRepository;
+
+        public readonly IMapper _mapper;
+
+        public UsersController(IUserRepository userRepoistory, IMapper mapper){
+            _userRepository = userRepoistory;
+            _mapper = mapper;
         }
 
         // api/users
         [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            var users =  await _context.Users.ToListAsync();
+            // var users =  await _userRepository.GetUsersAsync();
 
-            return users;
+            // var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
+
+            // return Ok(usersToReturn);
+
+            var users = await _userRepository.GetMembersAsync();
+            return Ok(users);
         }
 
 
          // api/users/3
-      
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUser(int id)
+        public async Task<ActionResult<MemberDto>> GetUserById(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _userRepository.GetUserByIdAsync(id);
 
-            return user;
+            return _mapper.Map<MemberDto>(user);
         }
 
-        // //Edit User by Id
-        // [Authorize]
-        [HttpPost("editUser/{id}")]
-         public async Task<ActionResult<IEnumerable<AppUser>>> EditUser(int id, AppUser appuser)
+        // api/users/username/alma
+        [HttpGet("username/{username}")]
+        public async Task<ActionResult<MemberDto>> GetUserByName(string username)
         {
-            var user = await _context.Users.FindAsync(id);
+            // var user = await _userRepository.GetUserByUsernameAsync(username);
 
-            if(user != null){
-                user.Id = id;
-                user.FirstName = appuser.FirstName;
-                user.LastName = appuser.LastName;
-                user.UserName = appuser.UserName;
-                user.Active = appuser.Active;
-            }
+            // return _mapper.Map<MemberDto>(user);
 
-            var users =  await _context.Users.ToListAsync();
-            return users;
-
+            return await _userRepository.GetMemberAsync(username);
         }
 
-        // //Delete a user
-        // [Authorize]
-        // [HttpPost("deleteUser/{id}")]
-        //  public async Task<ActionResult> DeleteUser(int id)
-        // {
-        //     var user = await _context.Users.FindAsync(id);
-
-        //     await _context.Users.(user);
-
-        //     return Ok();
-        // }
+     
     }
 }

@@ -13,5 +13,7 @@ namespace API.DTOs
 
         public string Token { get; set; }
 
+         public bool Active { get; set; } = true;
+
     }
 }
