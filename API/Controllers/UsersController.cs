@@ -47,17 +47,17 @@ namespace API.Controllers
         }
 
 
-         // api/users/3
-        [HttpGet("{id}")]
-        public async Task<ActionResult<MemberDto>> GetUserById(int id)
-        {
-            var user = await _userRepository.GetUserByIdAsync(id);
+        //  // api/users/3
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<MemberDto>> GetUserById(int id)
+        // {
+        //     var user = await _userRepository.GetUserByIdAsync(id);
 
-            return _mapper.Map<MemberDto>(user);
-        }
+        //     return _mapper.Map<MemberDto>(user);
+        // }
 
         // api/users/username/alma
-        [HttpGet("username/{username}")]
+        [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUserByName(string username)
         {
             // var user = await _userRepository.GetUserByUsernameAsync(username);

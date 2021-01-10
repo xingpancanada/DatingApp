@@ -23,7 +23,7 @@ namespace API.Data
             {
                 using var hamc = new HMACSHA512();
 
-                user.UserName = user.UserName.ToLower();
+                user.Username = user.Username.ToLower();
                 user.PasswordHash = hamc.ComputeHash(Encoding.UTF8.GetBytes("Passord"));
                 user.PasswordSalt = hamc.Key;
 
