@@ -15,5 +15,7 @@ namespace API.DTOs
 
          public bool Active { get; set; } = true;
 
+         public string PhotoUrl { get; set; }
+
     }
 }
