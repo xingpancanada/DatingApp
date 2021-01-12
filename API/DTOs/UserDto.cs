@@ -17,5 +17,6 @@ namespace API.DTOs
 
          public string PhotoUrl { get; set; }
 
+
     }
 }

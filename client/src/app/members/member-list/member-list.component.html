@@ -1,14 +1,5 @@
-<div class="row">
-    <div *ngFor="let member of members$ | async" class="col-2">
-        <app-member-card [member]="member"></app-member-card>
-    </div>
-</div>
 
-
-
-
-
-<!-- <div class="text-center mt-3">
+<div class="text-center mt-3">
     <h2>Your matches - {{pagination?.totalItems}} found</h2>
 </div>
 
@@ -37,6 +28,7 @@
 
         <button class="btn btn-primary ml-1" type="submit">Apply Filters</button>
         <button (click)="resetFilters()" class="btn btn-info ml-1" type="submit">Reset Filters</button>
+        
         <div class="col">
             <div class="btn-group float-right">
                 <button 
@@ -61,11 +53,14 @@
     </form>
 </div>
 
+<hr/>
+
 <div class="row">
     <div *ngFor="let member of members" class="col-2">
         <app-member-card [member]="member"></app-member-card>
     </div>
 </div>
+
 
 <div class="d-flex justify-content-center" *ngIf="pagination">
     <pagination 
@@ -79,4 +74,8 @@
         firstText="&laquo;" 
         lastText="&raquo;">
     </pagination>
-</div> -->
+</div> 
+
+
+
+
