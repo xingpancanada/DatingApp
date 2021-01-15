@@ -2,14 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using API.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
-    public class AppUser
+    public class AppUser : IdentityUser<int>
     {
-        public int Id {get; set;}
+        // public int Id {get; set;}
 
-        public string Username {get; set;}
+        // public string Username {get; set;}
 
         public string FirstName {get; set;}
 
@@ -17,9 +18,9 @@ namespace API.Entities
 
         public bool Active { get; set; } = true;
 
-        public byte[] PasswordHash { get; set;}
+        // public byte[] PasswordHash { get; set;}
 
-        public byte[] PasswordSalt { get; set;}
+        // public byte[] PasswordSalt { get; set;}
 
         public string KnownAs { get; set; }
 
@@ -54,6 +55,8 @@ namespace API.Entities
 
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }
+
+        public ICollection<AppUserRole> UserRoles { get; set; }
 
     }
 }

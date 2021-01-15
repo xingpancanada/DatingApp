@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using API.Extensions;
 using API.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -40,6 +41,7 @@ namespace API.Controllers
         }
 
         // api/users
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -50,7 +52,7 @@ namespace API.Controllers
             // return Ok(usersToReturn);
 
             var user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
-            userParams.CurrentUsername = user.Username;
+            userParams.CurrentUsername = user.UserName;
 
             if(string.IsNullOrEmpty(userParams.Gender)){
                 userParams.Gender = user.Gender == "male" ? "female" : "male";
@@ -73,7 +75,7 @@ namespace API.Controllers
         //     return _mapper.Map<MemberDto>(user);
         // }
 
-        // api/users/username/alma
+        // api/users/alma
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUserByName(string username)
         {
@@ -123,7 +125,7 @@ namespace API.Controllers
             if (await _userRepository.SaveAllAsync())
             {
                 // return _mapper.Map<PhotoDto>(photo);
-                return CreatedAtRoute("GetUser", new {username = user.Username}, _mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("GetUser", new {username = user.UserName}, _mapper.Map<PhotoDto>(photo));
             }
 
             return BadRequest("Problem adding photo!");
