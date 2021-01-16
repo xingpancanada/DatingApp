@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -10,7 +11,7 @@ namespace API.Interfaces
     {
         void Update(AppUser user);
 
-        Task<bool> SaveAllAsync();
+        // Task<bool> SaveAllAsync();
 
         Task<IEnumerable<AppUser>> GetUsersAsync();
 
@@ -24,6 +25,8 @@ namespace API.Interfaces
 
 
         Task<MemberDto> GetMemberAsync(string username);
+
+        Task<String> GetUserGender(string username);
 
     }
 }

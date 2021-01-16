@@ -15,19 +15,19 @@ namespace API.Helpers
 
             if (!resultContext.HttpContext.User.Identity.IsAuthenticated) return;
 
-            // var username = resultContext.HttpContext.User.GetUserName();
-            var userId = resultContext.HttpContext.User.GetUserId();
-            var repo = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
-            // var user = await repo.GetUserByUsernameAsync(username);
-            var user = await repo.GetUserByIdAsync(userId);
-            user.LastActive = DateTime.UtcNow;
-            await repo.SaveAllAsync();
-
+            // // var username = resultContext.HttpContext.User.GetUserName();
             // var userId = resultContext.HttpContext.User.GetUserId();
-            // var uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
-            // var user = await uow.UserRepository.GetUserByIdAsync(userId);
+            // var repo = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
+            // // var user = await repo.GetUserByUsernameAsync(username);
+            // var user = await repo.GetUserByIdAsync(userId);
             // user.LastActive = DateTime.UtcNow;
-            // await uow.Complete();
+            // await repo.SaveAllAsync();
+
+            var userId = resultContext.HttpContext.User.GetUserId();
+            var uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
+            var user = await uow.UserRepository.GetUserByIdAsync(userId);
+            user.LastActive = DateTime.UtcNow;
+            await uow.Complete();
         }
     }
 }
